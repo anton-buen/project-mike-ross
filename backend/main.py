@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 
+from routers import parse
+
 load_dotenv()
 
 app = FastAPI(title="Project Mike Ross API")
@@ -16,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(parse.router)
 
 @app.get("/api/health")
 def health_check():
